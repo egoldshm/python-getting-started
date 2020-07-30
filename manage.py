@@ -10,7 +10,7 @@ def start_callback(update, context):
     update.message.reply_text("Welcome to my awesome bot!")
 
 
-if __name__ == "__main__":
+def main():
     import os
 
     TOKEN = "1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8"
@@ -24,3 +24,9 @@ if __name__ == "__main__":
     updater.dispatcher.add_handler(start_callback)
 
     updater.idle()
+
+
+print("started 1", file=open('file.txt', 'w'))
+main()
+print("ended 1", file=open('file.txt', 'w'))
+
