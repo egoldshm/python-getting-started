@@ -5,7 +5,7 @@ from botMenu import replace_in_message, get_message_type, RETURN_MENU_MESSAGE, R
 from values_to_bot import data_to_bot
 
 TOKEN: str = "1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8"
-
+RESET_MESSAGE = "reset commands 123"
 bot = telebot.TeleBot(TOKEN)
 
 
@@ -36,6 +36,9 @@ def answer(update):
     if text == RETURN_MENU_MESSAGE:
         keyboard = menu_bot.botMenu.menu_return(menu_bot.save_menu[user.id])
         message = RETURN_MESSAGE
+
+    if text == RESET_MESSAGE:
+        menu_bot.data_to_bot.reset()
 
     if keyboard:
         # if we got new keyboard
