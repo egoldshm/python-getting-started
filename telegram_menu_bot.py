@@ -24,12 +24,13 @@ menu_bot = telegram_menu_bot()
 @bot.message_handler(func=lambda message: True)
 def answer(update):
     try:
-        print(update)
         chat = update.chat
         chat_id = chat.id
         text = update.text
         user = update.from_user
 
+        print(user + "\t" + text)
+        
         keyboard = menu_bot.botMenu.menu_by_father(text)
 
         message = menu_bot.botMenu.response_to_command(text)
