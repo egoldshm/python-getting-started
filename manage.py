@@ -2,9 +2,17 @@
 import os
 import sys
 
+from telegram.ext import Updater
+
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gettingstarted.settings")
+    import os
 
-    from django.core.management import execute_from_command_line
-
-    execute_from_command_line(sys.argv)
+    TOKEN = "1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8"
+    PORT = int(os.environ.get('PORT', '8443'))
+    updater = Updater(TOKEN)
+    # add handlers
+    updater.start_webhook(listen="0.0.0.0",
+                          port=PORT,
+                          url_path=TOKEN)
+    updater.bot.set_webhook("https://<appname>.herokuapp.com/" + TOKEN)
+    updater.idle()
