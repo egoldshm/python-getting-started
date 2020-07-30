@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from telebot import types
 from telebot.types import ReplyKeyboardMarkup
@@ -42,11 +42,14 @@ class BotMenu:
                 return i["answer"]
         return COMMAND_NOT_FOUND_MESSAGE
 
-    def menu_return(self, menu_name) -> ReplyKeyboardMarkup:
-        father_menu = list(filter(lambda i: i["name"] == menu_name, self.commands))[0]["father_menu"]
-        return self.menu_by_father(father_menu)
+    def menu_return(self, menu_name) -> Optional[str]:
+        fathers = list(filter(lambda i: i["name"] == menu_name, self.commands))
+        if len(fathers) == 0:
+            return None
+        father_menu = fathers[0]["father_menu"]
+        return father_menu
 
-    def menu_by_father(self, father_name) -> ReplyKeyboardMarkup:
+    def menu_by_father(self, father_name) -> Optional[ReplyKeyboardMarkup]:
 
         # take only command that father_menu is father name
         commands_for_menu = list(filter(lambda i: i["father_menu"] == father_name, self.commands))
@@ -73,6 +76,7 @@ class BotMenu:
         for i in left_buttons:
             buttons.append([i])
 
-        buttons.append([RETURN_MENU_MESSAGE])
+        if self.menu_return(father_name) != "":
+            buttons.append([RETURN_MENU_MESSAGE])
 
         return list_of_lists_to_keyboards(buttons)
