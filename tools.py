@@ -1,4 +1,7 @@
+from telebot import types
+
 from access_to_google_sheets import *
+
 
 
 def get(dict1: dict, string: str) -> str:
@@ -57,7 +60,18 @@ def get_menu_by_father(father_name):
             buttons[int(i["row"])][int(i["column"])] = i["name"]
     for i in left_buttons:
         buttons.append([i])
-    return buttons
+
+    # return buttons
+
+    # make to keyboard format
+    markup = types.ReplyKeyboardMarkup()
+
+    for row in buttons:
+        list_of_buttons = []
+        for item in row:
+            list_of_buttons.append(types.KeyboardButton(item))
+        markup.add(*list_of_buttons)
+    return markup
 
 
 def reset_bot():

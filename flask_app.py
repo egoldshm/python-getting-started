@@ -2,21 +2,9 @@
 import csv
 import time
 
-from flask import Flask, request
-import telepot
-from telepot.loop import MessageLoop
-from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
-from tools import *
+from telegram import ReplyKeyboardMarkup, bot
 
-# proxy_url = "http://proxy.server:3128"
-# telepot.api._pools = {
-#    'default': urllib3.ProxyManager(proxy_url=proxy_url, num_pools=3, maxsize=10, retries=False, timeout=30),
-# }
-# telepot.api._onetime_pool_spec = (
-#    urllib3.ProxyManager, dict(proxy_url=proxy_url, num_pools=1, maxsize=1, retries=False, timeout=30))
-
-# secret = "7cca0cb2-17fc-4519-b0f4-f6d7dfdc2941"
-bot = telepot.Bot("1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8")
+from tools import get_menu_by_father, get_message_by_command
 
 
 def replace_in_message(message, update):
@@ -30,11 +18,6 @@ def get_message_type(message):
     if message[0:5] == "file ":
         return "FILE", message[5:].split(" ")[0], " ".join(message[6:].split(" ")[1:])
     return "TEXT", message, ""
-
-
-# bot.setWebhook("https://egoldshm.pythonanywhere.com/{}".format(secret), max_connections=1)
-
-# app = Flask(__name__)
 
 
 # @app.route('/{}'.format(secret), methods=["POST"])
@@ -72,7 +55,6 @@ def on_chat_message(update):
 
 save_menu = {}
 bot.deleteWebhook()
-MessageLoop(bot, {'chat': on_chat_message}).run_forever()
 print('Listening ...')
 while 1:
     time.sleep(10)
