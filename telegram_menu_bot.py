@@ -29,8 +29,8 @@ def answer(update):
         text = update.text
         user = update.from_user
 
-        print(user + "\t" + text)
-        
+        print(str(user) + "\t" + text)
+
         keyboard = menu_bot.botMenu.menu_by_father(text)
 
         message = menu_bot.botMenu.response_to_command(text)
