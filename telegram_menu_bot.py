@@ -82,9 +82,8 @@ def run(updater):
     updater.idle()
 
 
-if __name__ == '__main__':
-    updater = Updater(TOKEN, use_context=True)
+updater = Updater(TOKEN, use_context=True)
 
-    updater.dispatcher.add_handler(MessageHandler(lambda _: True, answer))
+updater.dispatcher.add_handler(MessageHandler(lambda _: True, answer))
 
-    run(updater)
+run(updater)
