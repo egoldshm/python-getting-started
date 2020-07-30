@@ -2,7 +2,13 @@
 import os
 import sys
 
-from telegram.ext import Updater
+from telegram import Bot
+from telegram.ext import Updater, Dispatcher
+
+
+def start_callback(update, context):
+    update.message.reply_text("Welcome to my awesome bot!")
+
 
 if __name__ == "__main__":
     import os
@@ -10,9 +16,11 @@ if __name__ == "__main__":
     TOKEN = "1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8"
     PORT = int(os.environ.get('PORT', '8443'))
     updater = Updater(TOKEN)
-    # add handlers
     updater.start_webhook(listen="0.0.0.0",
                           port=PORT,
                           url_path=TOKEN)
-    updater.bot.set_webhook("https://<appname>.herokuapp.com/" + TOKEN)
+    updater.bot.set_webhook("https:///mysterious-sierra-44668.herokuapp.com/" + TOKEN)
+
+    updater.dispatcher.add_handler(start_callback)
+
     updater.idle()
