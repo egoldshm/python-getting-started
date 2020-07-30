@@ -2,6 +2,7 @@ import telebot
 from telebot import types
 
 from botMenu import replace_in_message, get_message_type, RETURN_MENU_MESSAGE, RETURN_MESSAGE
+from tools import get_dict
 from values_to_bot import data_to_bot
 
 TOKEN: str = "1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8"
@@ -23,6 +24,7 @@ menu_bot = telegram_menu_bot()
 @bot.message_handler(func=lambda message: True)
 def answer(update):
     try:
+        print(get_dict(update))
         chat = update.chat
         chat_id = chat.id
         text = update.text
