@@ -24,7 +24,7 @@ menu_bot = telegram_menu_bot()
 @bot.message_handler(func=lambda message: True)
 def answer(update):
     try:
-        print(get_dict(update))
+        print(update)
         chat = update.chat
         chat_id = chat.id
         text = update.text
