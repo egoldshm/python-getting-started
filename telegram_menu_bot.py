@@ -1,13 +1,14 @@
-import telebot
-from telebot import types
+import os
+
+from telegram.ext import Updater, MessageHandler
 
 from botMenu import replace_in_message, get_message_type, RETURN_MENU_MESSAGE, RETURN_MESSAGE
-from tools import get_dict
 from values_to_bot import data_to_bot
+
+PORT = int(os.environ.get('PORT', 5000))
 
 TOKEN: str = "1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8"
 RESET_MESSAGE = "reset commands 123"
-bot = telebot.TeleBot(TOKEN)
 
 
 class telegram_menu_bot:
@@ -20,8 +21,12 @@ class telegram_menu_bot:
 
 menu_bot = telegram_menu_bot()
 
+updater = Updater(TOKEN)
 
-@bot.message_handler(func=lambda message: True)
+bot = updater.bot
+
+
+# @bot.message_handler(func=lambda message: True)
 def answer(update):
     try:
         chat = update.chat
@@ -60,4 +65,26 @@ def answer(update):
         print("ERROR!\n" + str(ex))
         pass
 
-bot.polling()
+
+mode = os.getenv("MODE")
+
+
+def run(updater):
+    PORT = int(os.environ.get("PORT", "8443"))
+    HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
+    # Code from https://github.com/python-telegram-bot/python-telegram-bot/wiki/Webhooks#heroku
+    updater.start_webhook(listen="0.0.0.0",
+                          port=PORT,
+                          url_path=TOKEN)
+
+    print(HEROKU_APP_NAME)
+    updater.bot.set_webhook("https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TOKEN))
+    updater.idle()
+
+
+if __name__ == '__main__':
+    updater = Updater(TOKEN, use_context=True)
+
+    updater.dispatcher.add_handler(MessageHandler(lambda _: True, answer))
+
+    run(updater)
