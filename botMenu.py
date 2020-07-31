@@ -40,11 +40,12 @@ class BotMenu:
     def response_to_command(self, text):
         result = []
         for i in self.commands:
-            if i["name"] == text and i["substring"] == 'FALSE':
-                return i["answer"]
-            if i["name"] in text and i["substring"] == 'TRUE':
-                if i["answer"] not in result:
-                    result.append(i["answer"])
+            if i["name"] in text:
+                if ' ' in i["name"]:
+                    return i["answer"]
+                else:
+                    if i["answer"] not in result:
+                        result.append(i["answer"])
         if result:
             return "\n".join(result)
         return COMMAND_NOT_FOUND_MESSAGE
