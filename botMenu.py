@@ -1,22 +1,8 @@
 from typing import List, Dict, Optional
 
-from telebot import types
-from telebot.types import ReplyKeyboardMarkup
-
 COMMAND_NOT_FOUND_MESSAGE = "לא נמצא!"
 RETURN_MENU_MESSAGE = "חזור 🔁"
 RETURN_MESSAGE = "חזרתי 💪"
-
-
-def list_of_lists_to_keyboards(buttons: List[List[str]]) -> ReplyKeyboardMarkup:
-    # make to keyboard format
-    markup = types.ReplyKeyboardMarkup()
-    for row in buttons:
-        list_of_buttons = []
-        for item in row:
-            list_of_buttons.append(types.KeyboardButton(item))
-        markup.add(*list_of_buttons)
-    return markup
 
 
 def get_message_type(message):
@@ -56,7 +42,7 @@ class BotMenu:
         father_menu = fathers[0]["father_menu"]
         return father_menu
 
-    def menu_by_father(self, father_name) -> Optional[ReplyKeyboardMarkup]:
+    def menu_by_father(self, father_name):
 
         # take only command that father_menu is father name
         commands_for_menu = list(filter(lambda i: i["father_menu"] == father_name, self.commands))
@@ -86,4 +72,4 @@ class BotMenu:
         if self.menu_return(father_name) != "":
             buttons.append([RETURN_MENU_MESSAGE])
 
-        return list_of_lists_to_keyboards(buttons)
+        return buttons
