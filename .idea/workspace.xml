@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bd7293c-c0e7-448c-bd62-d2d6715b3792" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/botMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/botMenu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/telegram_menu_bot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/הבוט החדש.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/הבוט החדש.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/values_to_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/values_to_bot.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +44,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.manage">
+  <component name="RunManager" selected="Python.flask_app">
     <configuration name="access_to_google_sheets" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="הבוט החדש" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,8 +159,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.manage" />
         <item itemvalue="Python.flask_app" />
+        <item itemvalue="Python.manage" />
         <item itemvalue="Python.tools" />
         <item itemvalue="Python.setup" />
       </list>

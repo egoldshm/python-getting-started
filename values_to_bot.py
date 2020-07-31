@@ -32,7 +32,7 @@ class data_to_bot:
         if not self.spreadsheet_reader.values:
             raise Exception("Data not exist in the file with id '{}'".format(SPREADSHEET_ID))
 
-        result = list(map(list_to_dict, self.spreadsheet_reader.values))
+        result = list(filter(lambda item: item["name"] != "", list(map(list_to_dict, self.spreadsheet_reader.values))))
 
         return result
 
