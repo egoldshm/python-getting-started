@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1bd7293c-c0e7-448c-bd62-d2d6715b3792" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/הבוט החדש.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/הבוט החדש.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/botMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/botMenu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/token.pickle" afterDir="false" />
-    </list>
+    <list default="true" id="1bd7293c-c0e7-448c-bd62-d2d6715b3792" name="Default Changelist" comment="Fixed the problem of multiple answers." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -189,6 +183,13 @@
       <option name="presentableId" value="Default" />
       <updated>1580463338307</updated>
     </task>
+    <task id="LOCAL‎00001" summary="Fixed the problem of multiple answers.">
+      <created>1596198332010</created>
+      <option name="number" value="LOCAL‎00001" />
+      <option name="presentableId" value="LOCAL‎00001" />
+      <updated>1596198332010</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,23 +204,31 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed the problem of multiple answers." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the problem of multiple answers." />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1596197818293">
+    <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1596198123736">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1596197818293" />
-    <state width="1259" height="163" key="GridCell.Tab.0.center" timestamp="1596197818292">
+    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1596198123736" />
+    <state width="1259" height="163" key="GridCell.Tab.0.center" timestamp="1596198123735">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1596197818292" />
-    <state width="1259" height="163" key="GridCell.Tab.0.left" timestamp="1596197818291">
+    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1596198123735" />
+    <state width="1259" height="163" key="GridCell.Tab.0.left" timestamp="1596198123734">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1596197818291" />
-    <state width="1259" height="163" key="GridCell.Tab.0.right" timestamp="1596197818293">
+    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1596198123734" />
+    <state width="1259" height="163" key="GridCell.Tab.0.right" timestamp="1596198123735">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1596197818292" />
+    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1596198123735" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1596198180366">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1596198180366" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
