@@ -34,12 +34,19 @@ def replace_in_message(message, first_name, last_name):
 class BotMenu:
 
     def __init__(self, commands: List[Dict]):
+        print(commands)
         self.commands = commands
 
     def response_to_command(self, text):
+        result = []
         for i in self.commands:
-            if i["name"] == text:
+            if i["name"] == text and i["substring"] == 'FALSE':
                 return i["answer"]
+            if i["name"] in text and i["substring"] == 'TRUE':
+                if i["answer"] not in result:
+                    result.append(i["answer"])
+        if result:
+            return "\n".join(result)
         return COMMAND_NOT_FOUND_MESSAGE
 
     def menu_return(self, menu_name) -> Optional[str]:

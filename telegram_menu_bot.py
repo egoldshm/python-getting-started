@@ -19,15 +19,20 @@ class telegram_menu_bot:
 menu_bot = telegram_menu_bot()
 
 
-@bot.message_handler(func=lambda message: True)
+@bot.message_handler(func=lambda message: True,
+                     content_types=['audio', 'photo', 'voice', 'video', 'document', 'text', 'location', 'contact',
+                                    'sticker'])
 def answer(update):
-    try:
+    #try:
         chat = update.chat
         chat_id = chat.id
         text = update.text
+
         user = update.from_user
 
-        print(str(user) + "\t" + text)
+        if update.document:
+            print(update.document.file_id)
+        print(str(user) + "\t" + str(text))
 
         keyboard = menu_bot.botMenu.menu_by_father(text)
 
@@ -36,7 +41,7 @@ def answer(update):
         message = replace_in_message(message, update.from_user.first_name, update.from_user.last_name)
 
         if text == RETURN_MENU_MESSAGE:
-            keyboard = menu_bot.botMenu.menu_by_father(menu_bot.botMenu.menu_return(menu_bot.save_menu[user.id]))
+            keyboard = menu_bot.botMenu.menu_by_father("/start")
             message = RETURN_MESSAGE
 
         if text == RESET_MESSAGE:
@@ -47,6 +52,7 @@ def answer(update):
             # if we got new keyboard
             menu_bot.save_menu[user.id] = text
             bot.send_message(chat_id, message, reply_markup=keyboard, parse_mode='Markdown')
+
         else:
             type_of_message, data, data2 = get_message_type(message)
             if type_of_message == "FILE":
@@ -54,8 +60,9 @@ def answer(update):
             else:
                 bot.send_message(chat_id, message)
         return "OK"
-    except Exception as ex:
-        print("ERROR!\n" + str(ex))
-        pass
+    #except Exception as ex:
+    #    print("ERROR!\n" + str(ex))
+    #    pass
+
 
 bot.polling()
