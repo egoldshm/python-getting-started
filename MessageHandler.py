@@ -65,6 +65,8 @@ class Telegram_menu_bot:
                             pass
                     message = "ההודעה נשלחה בהצלחה ל{} משתמשים".format(count)
 
+            # todo: אפשרות לשלוח תפריט חדש יחד עם תמונה או קובץ
+            # todo: לתקן את markup
             if keyboard:
                 # if we got new keyboard
                 self.save_menu[user.id] = text
@@ -75,7 +77,7 @@ class Telegram_menu_bot:
                 first, second = splitMessage(message)
                 if type_of_message == "photo":
                     bot.IsendPhoto(chat_id, first, second)
-                if type_of_message == "file":
+                elif type_of_message == "file":
                     bot.IsendFile(chat_id, first, second)
                 else:
                     bot.IsendMessage(chat_id, first)
