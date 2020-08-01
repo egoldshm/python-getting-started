@@ -2,7 +2,7 @@ import os
 from typing import List, Any
 
 
-class save_data_in_file:
+class Save_data_in_file:
     data: List[str]
 
     def __init__(self, file_name):
@@ -14,9 +14,14 @@ class save_data_in_file:
         else:
             file = open(file_name, "r")
             self.data = file.readlines()
+            file.close()
 
     def name_exist(self, name: str) -> bool:
-        return name in self.data
+        return str(name) in self.data
 
     def add_name(self, name: str):
-        pass
+        if not self.name_exist(name):
+            self.data.append(name)
+            file = open(self.file_name, "a")
+            file.write(name + "\n")
+            file.close()

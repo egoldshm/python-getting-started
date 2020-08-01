@@ -4,11 +4,7 @@ COMMAND_NOT_FOUND_MESSAGE = "לא נמצא!"
 RETURN_MENU_MESSAGE = "חזור 🔁"
 RETURN_MESSAGE = "חזרתי 💪"
 
-
-def get_message_type(message):
-    if message[0:5] == "file ":
-        return "FILE", message[5:].split(" ")[0], " ".join(message[6:].split(" ")[1:])
-    return "TEXT", message, ""
+types = ["photo", "document"]
 
 
 class BotMenu:
@@ -16,6 +12,10 @@ class BotMenu:
     def __init__(self, commands: List[Dict]):
         print(commands)
         self.commands = commands
+
+    def get_message_type(self, message):
+        type_of_response = list(filter(lambda i: i["name"] == message, self.commands))[0]["type"]
+        return type_of_response
 
     def response_to_command(self, text):
         result = []

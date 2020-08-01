@@ -22,7 +22,7 @@ class TelepbotBot:
     def __init__(self, bot_p):
         self.bot = bot_p
 
-    def IsendMessage(self, chat_id, message, keyboard):
+    def IsendMessage(self, chat_id, message, keyboard = None):
         if type(keyboard) is str:
             self.bot.send_document(chat_id, message, keyboard)
 
@@ -31,6 +31,13 @@ class TelepbotBot:
             self.bot.send_message(chat_id, message, reply_markup=keyboard, parse_mode='Markdown')
         else:
             self.bot.send_message(chat_id, message, parse_mode='Markdown')
+
+    def IsendFile(self, chat_id, file_id, text):
+        self.bot.send_document(chat_id, file_id, caption=text)
+
+    def IsendPhoto(self, chat_id, photo_id, text):
+        self.bot.send_photo(chat_id, photo_id, caption=text)
+
 
 
 @bot.message_handler(func=lambda message: True,
@@ -44,7 +51,6 @@ def answer(update):
 
     user = update.from_user
     print(user)
-
     user_p = User(user.id, user.first_name, user.last_name, user.username)
 
     telegram_menu_bot = Telegram_menu_bot()

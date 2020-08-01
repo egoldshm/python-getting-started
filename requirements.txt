@@ -1,3 +1,6 @@
+urllib3
+flask
+telepot
 telebot
 telegram
 python-telegram-bot
