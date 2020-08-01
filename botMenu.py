@@ -11,12 +11,6 @@ def get_message_type(message):
     return "TEXT", message, ""
 
 
-def replace_in_message(message, first_name, last_name):
-    message = message.replace("*|FNAME|*", first_name if first_name else "")
-    message = message.replace("*|LNAME|*", last_name if last_name else "")
-    return message
-
-
 class BotMenu:
 
     def __init__(self, commands: List[Dict]):

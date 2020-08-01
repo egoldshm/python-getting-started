@@ -5,11 +5,11 @@ import urllib3
 from flask import Flask, request
 from telepot.namedtuple import ReplyKeyboardMarkup
 
-from botMenu import replace_in_message, get_message_type, RETURN_MENU_MESSAGE, RETURN_MESSAGE
+from MessageHandler import Telegram_menu_bot
+from User import User
 from values_to_bot import data_to_bot
 
 TOKEN: str = "1391323439:AAEog24qd0XYB3O--OANiGUWOvU0elcPXT0"
-RESET_MESSAGE = "reset commands 123"
 secret = "7bd8040d-baff-41c2-b16f-cdffb6e168f0"
 
 proxy_url = "http://proxy.server:3128"
@@ -25,80 +25,51 @@ bot.setWebhook("https://yatmal.pythonanywhere.com/{}".format(secret), max_connec
 app = Flask(__name__)
 
 
-class telegram_menu_bot:
-    def __init__(self):
-        self.data_to_bot = data_to_bot()
-        self.botMenu = self.data_to_bot.botMenu
-        self.save_menu = {}
-        print("check")
-
-
-menu_bot = telegram_menu_bot()
-
-
 def list_of_lists_to_keyboards(buttons: List[List[str]]):
     return ReplyKeyboardMarkup(keyboard=buttons)
-    #
-    # make to keyboard format - telebot: old.
-    # markup = types.ReplyKeyboardMarkup()
-    # for row in buttons:
-    #    list_of_buttons = []
-    #    for item in row:
-    #        list_of_buttons.append(types.KeyboardButton(item))
-    #    markup.add(*list_of_buttons)
-    # return markup"""
+
+
+class flaskBot:
+    def __init__(self, bot_p):
+        self.bot = bot_p
+
+    def IsendMessage(self, chat_id, message, keyboard):
+        if type(keyboard) is str:
+            self.bot.sendMessage(chat_id, message, keyboard)
+
+        if keyboard:
+            keyboard = list_of_lists_to_keyboards(keyboard)
+            self.bot.sendMessage(chat_id, message, reply_markup=keyboard)
+        else:
+            self.bot.sendMessage(chat_id, message)
+
+
+telegram_menu_bot = Telegram_menu_bot()
 
 
 @app.route('/{}'.format(secret), methods=["POST"])
 def answer():
-    try:
-        update = request.get_json()
+    mybot = flaskBot(bot)
 
-        if "message" not in update:
-            print("problem with 'message'")
-            print(str(update))
-        message = update["message"]
-        if "text" not in message:
-            print("problem with text")
-            print(str(message))
-        if "chat" not in message:
-            print("problem with chat")
-            print(str(message))
+    update = request.get_json()
 
-        chat = message["chat"]
-        chat_id = chat["id"]
-        text = message["text"]
+    if "message" not in update:
+        print("problem with 'message'")
+        print(str(update))
+    message = update["message"]
+    if "text" not in message:
+        print("problem with text")
+        print(str(message))
+    if "chat" not in message:
+        print("problem with chat")
+        print(str(message))
 
-        user = message["from"]
+    chat = message["chat"]
+    chat_id = chat["id"]
+    text = message["text"]
 
-        print(str(user) + "\t" + str(text))
+    user = message["from"]
+    print(user)
+    user = User(user["id"], user.get("first_name"), user.get("last_name"),user.get("user_name"))
 
-        keyboard = list_of_lists_to_keyboards(menu_bot.botMenu.menu_by_father(text))
-
-        message = menu_bot.botMenu.response_to_command(text)
-
-        message = replace_in_message(message, user["first_name"], user["last_name"])
-
-        if text == RETURN_MENU_MESSAGE:
-            keyboard = list_of_lists_to_keyboards(menu_bot.botMenu.menu_by_father("/start"))
-            message = RETURN_MESSAGE
-
-        if text == RESET_MESSAGE:
-            menu_bot.data_to_bot.reset()
-            menu_bot.botMenu = menu_bot.data_to_bot.botMenu
-
-        if keyboard:
-            # if we got new keyboard
-            menu_bot.save_menu[user["id"]] = text
-            bot.sendMessage(chat_id, message, reply_markup=keyboard)
-
-        else:
-            type_of_message, data, data2 = get_message_type(message)
-            if type_of_message == "FILE":
-                bot.sendMessage(chat_id, data, data2)
-            else:
-                bot.sendMessage(chat_id, message)
-        return "Done"
-    except Exception as ex:
-        print("ERROR: " + str(ex))
-        return "ERROR"
+    return telegram_menu_bot.messageHandler(chat_id, mybot, user, text)

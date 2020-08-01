@@ -1,68 +1,54 @@
 import telebot
+from telebot import types
 
-from botMenu import replace_in_message, get_message_type, RETURN_MENU_MESSAGE, RETURN_MESSAGE
-from values_to_bot import data_to_bot
+from MessageHandler import Telegram_menu_bot
+from User import User
 
-TOKEN: str = "1085962867:AAHQyGzmCyKJDfXGNmBgGVpt6Knb_eSzdE8"
-RESET_MESSAGE = "reset commands 123"
+TOKEN: str = "833051014:AAENxwuWjOM_TZcqPE-c5niOUuTq66MaC2g"
 bot = telebot.TeleBot(TOKEN)
 
 
-class telegram_menu_bot:
-    def __init__(self):
-        self.data_to_bot = data_to_bot()
-        self.botMenu = self.data_to_bot.botMenu
-        self.save_menu = {}
-        print("check")
+def list_of_lists_to_keyboards(buttons):
+    markup = types.ReplyKeyboardMarkup()
+    for row in buttons:
+        list_of_buttons = []
+        for item in row:
+            list_of_buttons.append(types.KeyboardButton(item))
+        markup.add(*list_of_buttons)
+    return markup
 
 
-menu_bot = telegram_menu_bot()
+class TelepbotBot:
+    def __init__(self, bot_p):
+        self.bot = bot_p
+
+    def IsendMessage(self, chat_id, message, keyboard):
+        if type(keyboard) is str:
+            self.bot.send_document(chat_id, message, keyboard)
+
+        if keyboard:
+            keyboard = list_of_lists_to_keyboards(keyboard)
+            self.bot.send_message(chat_id, message, reply_markup=keyboard, parse_mode='Markdown')
+        else:
+            self.bot.send_message(chat_id, message, parse_mode='Markdown')
 
 
 @bot.message_handler(func=lambda message: True,
                      content_types=['audio', 'photo', 'voice', 'video', 'document', 'text', 'location', 'contact',
                                     'sticker'])
 def answer(update):
-    #try:
-        chat = update.chat
-        chat_id = chat.id
-        text = update.text
+    telepbotBot = TelepbotBot(bot)
+    chat = update.chat
+    chat_id = chat.id
+    text = update.text
 
-        user = update.from_user
+    user = update.from_user
+    print(user)
 
-        if update.document:
-            print(update.document.file_id)
-        print(str(user) + "\t" + str(text))
+    user_p = User(user.id, user.first_name, user.last_name, user.username)
 
-        keyboard = menu_bot.botMenu.menu_by_father(text)
+    telegram_menu_bot = Telegram_menu_bot()
 
-        message = menu_bot.botMenu.response_to_command(text)
-
-        message = replace_in_message(message, update.from_user.first_name, update.from_user.last_name)
-
-        if text == RETURN_MENU_MESSAGE:
-            keyboard = menu_bot.botMenu.menu_by_father("/start")
-            message = RETURN_MESSAGE
-
-        if text == RESET_MESSAGE:
-            menu_bot.data_to_bot.reset()
-            menu_bot.botMenu = menu_bot.data_to_bot.botMenu
-
-        if keyboard:
-            # if we got new keyboard
-            menu_bot.save_menu[user.id] = text
-            bot.send_message(chat_id, message, reply_markup=keyboard, parse_mode='Markdown')
-
-        else:
-            type_of_message, data, data2 = get_message_type(message)
-            if type_of_message == "FILE":
-                bot.send_document(chat_id, data, data2)
-            else:
-                bot.send_message(chat_id, message)
-        return "OK"
-    #except Exception as ex:
-    #    print("ERROR!\n" + str(ex))
-    #    pass
-
+    return telegram_menu_bot.messageHandler(chat_id, telepbotBot, user_p, text)
 
 bot.polling()
