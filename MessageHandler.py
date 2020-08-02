@@ -1,3 +1,5 @@
+import json
+
 import User
 from ReportFile import Report_to_file
 from botMenu import RETURN_MENU_MESSAGE, RETURN_MESSAGE
@@ -52,6 +54,11 @@ class Telegram_menu_bot:
                 message = RETURN_MESSAGE
 
             if user.id in self.admins:
+                if text[0] == '{':
+                    text = json.dumps(text, indent=1)
+                    bot.IsendMessage(chat_id, text, mark_down=False)
+                    return "DEBUG"
+
                 if text == RESET_MESSAGE:
                     self.data_to_bot.reset()
                     self.botMenu = self.data_to_bot.botMenu
@@ -86,5 +93,5 @@ class Telegram_menu_bot:
 
             return "Done"
         except Exception as ex:
-            print("ERROR: " + str(ex))
-            return "ERROR"
+           print("ERROR (in messageHandler): " + str(ex))
+           return "ERROR"

@@ -22,9 +22,9 @@ class TelepbotBot:
     def __init__(self, bot_p):
         self.bot = bot_p
 
-    def IsendMessage(self, chat_id, message, keyboard = None):
+    def IsendMessage(self, chat_id, message, keyboard=None, mark_down=True):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.send_message(chat_id, message, parse_mode='Markdown', reply_markup=keyboard)
+        self.bot.send_message(chat_id, message, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard)
 
     def IsendFile(self, chat_id, file_id, text=None,keyboard=None):
         keyboard = self.get_valid_keyboard(keyboard)

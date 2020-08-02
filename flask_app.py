@@ -32,9 +32,9 @@ class flaskBot:
     def __init__(self, bot_p):
         self.bot = bot_p
 
-    def IsendMessage(self, chat_id, message, keyboard=None):
+    def IsendMessage(self, chat_id, message, keyboard=None, mark_down=True):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendMessage(chat_id, message, reply_markup=keyboard, parse_mode='Markdown')
+        self.bot.sendMessage(chat_id, message, reply_markup=keyboard, parse_mode='Markdown' if mark_down else None)
 
     def IsendFile(self, chat_id, file_id, text=None, keyboard=None):
         keyboard = self.get_valid_keyboard(keyboard)
@@ -77,14 +77,12 @@ def answer():
 
         chat = message["chat"]
         chat_id = chat["id"]
-        text = message["text"]
-
         user = message["from"]
-        print(user)
-        user = User(user["id"], user.get("first_name"), user.get("last_name"), user.get("user_name"))
 
-        return telegram_menu_bot.messageHandler(chat_id, mybot, user, text)
-
+        text = message["text"]
     except:
         print(update)
-        return "ERROR"
+        text = str(update)
+    user = User(user["id"], user.get("first_name"), user.get("last_name"), user.get("user_name"))
+    return telegram_menu_bot.messageHandler(chat_id, mybot, user, text)
+
