@@ -6,8 +6,7 @@ from google_spreadsheep_reader import google_spreadsheet_reader
 SPREADSHEET_ID = '1ckk82XyjJ7mSxwgDMJYew8dR3AgY8umj1l8XyHVJAIg'
 RANGE_OF_COMMANDS = 'range'
 
-file_column = ["name", "type", "father_menu", "answer", "row", "column", "button_inline", "substring"]
-
+file_column = ["name", "type", "father_menu", "answer", "row", "column", "button_inline", "is_contact"]
 
 def list_to_dict(row):
     result = {}
