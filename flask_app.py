@@ -38,11 +38,14 @@ class flaskBot:
 
     def IsendFile(self, chat_id, file_id, text=None, keyboard=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendDocument(chat_id, file_id, caption=text, parse_mode='Markdown',reply_markup=keyboard)
+        self.bot.sendDocument(chat_id, file_id, caption=text, parse_mode='Markdown', reply_markup=keyboard)
 
     def IsendPhoto(self, chat_id, photo_id, text=None, keyboard=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendPhoto(chat_id, photo_id, caption=text, parse_mode='Markdown',reply_markup=keyboard)
+        self.bot.sendPhoto(chat_id, photo_id, caption=text, parse_mode='Markdown', reply_markup=keyboard)
+
+    def IsendPolling(self):
+        pass
 
     def get_valid_keyboard(self, keyboard):
         if keyboard and not isinstance(keyboard, str):
@@ -50,8 +53,6 @@ class flaskBot:
         else:
             keyboard = None
         return keyboard
-
-
 
 
 telegram_menu_bot = Telegram_menu_bot()

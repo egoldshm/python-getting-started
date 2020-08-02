@@ -34,6 +34,7 @@ class TelepbotBot:
         keyboard = self.get_valid_keyboard(keyboard)
         self.bot.send_photo(chat_id, photo_id, caption=text,reply_markup=keyboard,parse_mode='Markdown')
 
+
     def get_valid_keyboard(self, keyboard):
         if keyboard and not isinstance(keyboard, str):
             keyboard = list_of_lists_to_keyboards(keyboard)

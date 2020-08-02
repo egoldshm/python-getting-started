@@ -1,12 +1,14 @@
 import User
+from ReportFile import Report_to_file
+from botMenu import RETURN_MENU_MESSAGE, RETURN_MESSAGE
 from getAdmins import getAdmins
 from save_data_in_file import Save_data_in_file
 from values_to_bot import data_to_bot
-from botMenu import RETURN_MENU_MESSAGE, RETURN_MESSAGE
 
 RESET_MESSAGE = "/reset"
 FILENAME_registered_users = "registered_users.txt"
 SEND_MESSAGE_TO_ALL = "שלח לכולם:\n"
+FILENAME_report = "messages.csv"
 
 
 def report_to_channel(bot, message, text, user):
@@ -32,6 +34,7 @@ class Telegram_menu_bot:
         self.save_menu = {}
         self.registered_users = Save_data_in_file(FILENAME_registered_users)
         self.admins = getAdmins()
+        self.file_reporter = Report_to_file(FILENAME_report)
         print("check")
 
     def messageHandler(self, chat_id, bot, user: User, text):
@@ -72,11 +75,12 @@ class Telegram_menu_bot:
             if type_of_message == "photo":
                 bot.IsendPhoto(chat_id, first, second, keyboard=keyboard)
             elif type_of_message == "file":
-                bot.IsendFile(chat_id, first, second,keyboard=keyboard)
+                bot.IsendFile(chat_id, first, second, keyboard=keyboard)
             else:
                 bot.IsendMessage(chat_id, message, keyboard=keyboard)
 
             report_to_channel(bot, message, text, user)
+            self.file_reporter.addLine(user.id, user.f_name, user.l_name, user.username, text, message)
 
             self.registered_users.add_name(str(user.id))
 
