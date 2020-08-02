@@ -4,7 +4,7 @@ from save_data_in_file import Save_data_in_file
 from values_to_bot import data_to_bot
 from botMenu import RETURN_MENU_MESSAGE, RETURN_MESSAGE
 
-RESET_MESSAGE = "reset"
+RESET_MESSAGE = "/reset"
 FILENAME_registered_users = "registered_users.txt"
 SEND_MESSAGE_TO_ALL = "שלח לכולם:\n"
 
@@ -65,22 +65,16 @@ class Telegram_menu_bot:
                             pass
                     message = "ההודעה נשלחה בהצלחה ל{} משתמשים".format(count)
 
-            # todo: אפשרות לשלוח תפריט חדש יחד עם תמונה או קובץ
-            # todo: לתקן את markup
-            if keyboard:
-                # if we got new keyboard
-                self.save_menu[user.id] = text
-                bot.IsendMessage(chat_id, message, keyboard)
+            self.save_menu[user.id] = text
 
+            type_of_message = self.botMenu.get_message_type(text)
+            first, second = splitMessage(message)
+            if type_of_message == "photo":
+                bot.IsendPhoto(chat_id, first, second, keyboard=keyboard)
+            elif type_of_message == "file":
+                bot.IsendFile(chat_id, first, second,keyboard=keyboard)
             else:
-                type_of_message = self.botMenu.get_message_type(text)
-                first, second = splitMessage(message)
-                if type_of_message == "photo":
-                    bot.IsendPhoto(chat_id, first, second)
-                elif type_of_message == "file":
-                    bot.IsendFile(chat_id, first, second)
-                else:
-                    bot.IsendMessage(chat_id, first)
+                bot.IsendMessage(chat_id, message, keyboard=keyboard)
 
             report_to_channel(bot, message, text, user)
 

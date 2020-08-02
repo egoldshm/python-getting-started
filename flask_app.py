@@ -33,20 +33,24 @@ class flaskBot:
         self.bot = bot_p
 
     def IsendMessage(self, chat_id, message, keyboard=None):
-        if type(keyboard) is str:
-            self.bot.sendMessage(chat_id, message, keyboard)
+        keyboard = self.get_valid_keyboard(keyboard)
+        self.bot.sendMessage(chat_id, message, reply_markup=keyboard, parse_mode='Markdown')
 
-        if keyboard:
+    def IsendFile(self, chat_id, file_id, text=None, keyboard=None):
+        keyboard = self.get_valid_keyboard(keyboard)
+        self.bot.sendDocument(chat_id, file_id, caption=text, parse_mode='Markdown',reply_markup=keyboard)
+
+    def IsendPhoto(self, chat_id, photo_id, text=None, keyboard=None):
+        keyboard = self.get_valid_keyboard(keyboard)
+        self.bot.sendPhoto(chat_id, photo_id, caption=text, parse_mode='Markdown',reply_markup=keyboard)
+
+    def get_valid_keyboard(self, keyboard):
+        if keyboard and not isinstance(keyboard, str):
             keyboard = list_of_lists_to_keyboards(keyboard)
-            self.bot.sendMessage(chat_id, message, reply_markup=keyboard)
         else:
-            self.bot.sendMessage(chat_id, message)
+            keyboard = None
+        return keyboard
 
-    def IsendFile(self, chat_id, file_id, text):
-        self.bot.sendDocument(chat_id, file_id, caption=text)
-
-    def IsendPhoto(self, chat_id, photo_id, text):
-        self.bot.sendPhoto(chat_id, photo_id, caption=text)
 
 
 

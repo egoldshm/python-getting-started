@@ -1,6 +1,7 @@
 from typing import List, Dict, Optional
 
-COMMAND_NOT_FOUND_MESSAGE = "לא נמצא!"
+COMMAND_NOT_FOUND_MESSAGE = "אוף. הבוט לא הבין מה אתה מחפש 🙁 הוא בסך הכל אוסף של אלגוריתמים - אז הטעות כנראה היא שלך " \
+                            "😜 תנסה לחפש במילים אחרות או להשתמש בתפריט... 😉 "
 RETURN_MENU_MESSAGE = "חזור 🔁"
 RETURN_MESSAGE = "חזרתי 💪"
 
@@ -14,7 +15,10 @@ class BotMenu:
         self.commands = commands
 
     def get_message_type(self, message):
-        type_of_response = list(filter(lambda i: i["name"] == message, self.commands))[0]["type"]
+        commands = list(filter(lambda i: i["name"] == message, self.commands))
+        if not commands:
+            return "text"
+        type_of_response = commands[0]["type"]
         return type_of_response
 
     def response_to_command(self, text):

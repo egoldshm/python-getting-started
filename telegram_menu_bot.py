@@ -23,20 +23,23 @@ class TelepbotBot:
         self.bot = bot_p
 
     def IsendMessage(self, chat_id, message, keyboard = None):
-        if type(keyboard) is str:
-            self.bot.send_document(chat_id, message, keyboard)
+        keyboard = self.get_valid_keyboard(keyboard)
+        self.bot.send_message(chat_id, message, parse_mode='Markdown', reply_markup=keyboard)
 
-        if keyboard:
+    def IsendFile(self, chat_id, file_id, text=None,keyboard=None):
+        keyboard = self.get_valid_keyboard(keyboard)
+        self.bot.send_document(chat_id, file_id, caption=text, reply_markup=keyboard, parse_mode='Markdown')
+
+    def IsendPhoto(self, chat_id, photo_id, text, keyboard=None):
+        keyboard = self.get_valid_keyboard(keyboard)
+        self.bot.send_photo(chat_id, photo_id, caption=text,reply_markup=keyboard,parse_mode='Markdown')
+
+    def get_valid_keyboard(self, keyboard):
+        if keyboard and not isinstance(keyboard, str):
             keyboard = list_of_lists_to_keyboards(keyboard)
-            self.bot.send_message(chat_id, message, reply_markup=keyboard, parse_mode='Markdown')
         else:
-            self.bot.send_message(chat_id, message, parse_mode='Markdown')
-
-    def IsendFile(self, chat_id, file_id, text):
-        self.bot.send_document(chat_id, file_id, caption=text)
-
-    def IsendPhoto(self, chat_id, photo_id, text):
-        self.bot.send_photo(chat_id, photo_id, caption=text)
+            keyboard = None
+        return keyboard
 
 
 
