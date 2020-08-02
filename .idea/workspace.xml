@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1bd7293c-c0e7-448c-bd62-d2d6715b3792" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MessageHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/MessageHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/botMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/botMenu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telegram_menu_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/telegram_menu_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/token.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save_data_in_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_data_in_file.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -238,7 +234,13 @@
       <option name="presentableId" value="LOCAL‎00006" />
       <updated>1596324828004</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL‎00007" summary="תיקון השגיאות של המקלדת וmarkdown">
+      <created>1596350109914</created>
+      <option name="number" value="LOCAL‎00007" />
+      <option name="presentableId" value="LOCAL‎00007" />
+      <updated>1596350109914</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,6 +262,7 @@
     <MESSAGE value="חילקתי את הקוד למחלקות מסודרות יותר" />
     <MESSAGE value="1. הוספתי שרק מנהלים יכולים לשלוח פקודות איפוס ולשלוח לכולם&#10;2. הוספתי אפשרות לשלוח תמונה או קובץ" />
     <MESSAGE value="תיקון שגיאות קטנות" />
-    <option name="LAST_COMMIT_MESSAGE" value="תיקון שגיאות קטנות" />
+    <MESSAGE value="תיקון השגיאות של המקלדת וmarkdown" />
+    <option name="LAST_COMMIT_MESSAGE" value="תיקון השגיאות של המקלדת וmarkdown" />
   </component>
 </project>

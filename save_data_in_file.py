@@ -13,7 +13,7 @@ class Save_data_in_file:
             file.close()
         else:
             file = open(file_name, "r")
-            self.data = file.readlines()
+            self.data = list(map(lambda s: s.strip(), file.readlines()))
             file.close()
 
     def name_exist(self, name: str) -> bool:
