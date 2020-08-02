@@ -24,12 +24,19 @@ class BotMenu:
     def response_to_command(self, text):
         result = []
         for i in self.commands:
-            if i["name"] in text:
-                if ' ' in i["name"]:
+            if i["is_contact"] == 'FALSE':
+                if i["name"] == text:
                     return i["answer"]
-                else:
-                    if i["answer"] not in result:
-                        result.append(i["answer"])
+            else:
+                spaceIndex = i["name"].find(' ')
+                firstName = i["name"][:spaceIndex]
+                lastName = i["name"][spaceIndex + 1:]
+                if firstName in text or lastName in text:
+                    if i["name"] in text:
+                        return i["answer"]
+                    else:
+                        if i["answer"] not in result:
+                            result.append(i["answer"])
         if result:
             return "\n".join(result)
         return COMMAND_NOT_FOUND_MESSAGE
