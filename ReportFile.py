@@ -15,5 +15,6 @@ class Report_to_file:
     def addLine(self, *line: str):
         file = open(self.file_name, "a")
         line = map(str, line)
+        line = map(lambda item: item.replace(",",";"),line)
         file.write("\n{0},{1}".format(datetime.datetime.now(), ",".join(line)))
         file.close()

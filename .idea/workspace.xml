@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bd7293c-c0e7-448c-bd62-d2d6715b3792" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MessageHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/MessageHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReportFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/botMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/botMenu.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -269,7 +271,13 @@
       <option name="presentableId" value="LOCAL‎00012" />
       <updated>1596752771099</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL‎00013" summary="אחרי שמאפסים את הבוט - הוא מעדכן גם את התפריט">
+      <created>1596752936031</created>
+      <option name="number" value="LOCAL‎00013" />
+      <option name="presentableId" value="LOCAL‎00013" />
+      <updated>1596752936031</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -307,7 +315,8 @@
     <MESSAGE value="הבוט שולח למנהלים מידע על קבצים שלהם" />
     <MESSAGE value="1. תוקנה הבעיה עם &quot;הרב&quot; - פשוט מתעלם מהמילה&#10;2. נוספה אפשרות לביטול markdown + ביטול תצוגה מקדימה של לינקים + חזרה לתפריט הראשי +" />
     <MESSAGE value="תוקנה תקלה קלה - sendPhoto וSendDoco לא מקבלים web_page_preview" />
-    <option name="LAST_COMMIT_MESSAGE" value="תוקנה תקלה קלה - sendPhoto וSendDoco לא מקבלים web_page_preview" />
+    <MESSAGE value="אחרי שמאפסים את הבוט - הוא מעדכן גם את התפריט" />
+    <option name="LAST_COMMIT_MESSAGE" value="אחרי שמאפסים את הבוט - הוא מעדכן גם את התפריט" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -46,7 +46,7 @@ class BotMenu:
                             if command["answer"] not in result:
                                 result.append(command["answer"])
         if result:
-            return "*הנה כל מה שמצאנו שמתאים לחיפוש שלך: 🔍*\n" + "🔵 "+ "\n 🔵 ".join(result), False, False, False
+            return "*הנה כל מה שמצאנו שמתאים לחיפוש שלך: 🔍*\n" + "🔵 " + "\n 🔵 ".join(result), False, False, False
         return COMMAND_NOT_FOUND_MESSAGE, False, False, True
 
     def menu_return(self, menu_name) -> Optional[str]:
@@ -56,7 +56,7 @@ class BotMenu:
         father_menu = fathers[0]["father_menu"]
         return father_menu
 
-    def menu_by_father(self, father_name = "/start"):
+    def menu_by_father(self, father_name="/start"):
 
         # take only command that father_menu is father name
         commands_for_menu = list(filter(lambda i: i["father_menu"] == father_name, self.commands))
