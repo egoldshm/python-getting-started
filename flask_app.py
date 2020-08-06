@@ -32,17 +32,17 @@ class flaskBot:
     def __init__(self, bot_p):
         self.bot = bot_p
 
-    def IsendMessage(self, chat_id, message, keyboard=None, mark_down=True):
+    def IsendMessage(self, chat_id, message, keyboard=None, mark_down=True, disable_web_preview=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendMessage(chat_id, message, reply_markup=keyboard, parse_mode='Markdown' if mark_down else None)
+        self.bot.sendMessage(chat_id, message, reply_markup=keyboard, parse_mode='Markdown' if mark_down else None, disable_web_page_preview=disable_web_preview)
 
-    def IsendFile(self, chat_id, file_id, text=None, keyboard=None):
+    def IsendFile(self, chat_id, file_id, text=None, keyboard=None, mark_down=True, disable_web_preview=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendDocument(chat_id, file_id, caption=text, parse_mode='Markdown', reply_markup=keyboard)
+        self.bot.sendDocument(chat_id, file_id, caption=text, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard, disable_web_page_preview=disable_web_preview)
 
-    def IsendPhoto(self, chat_id, photo_id, text=None, keyboard=None):
+    def IsendPhoto(self, chat_id, photo_id, text=None, keyboard=None, mark_down=True, disable_web_preview=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendPhoto(chat_id, photo_id, caption=text, parse_mode='Markdown', reply_markup=keyboard)
+        self.bot.sendPhoto(chat_id, photo_id, caption=text, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard, disable_web_page_preview=disable_web_preview)
 
     def IsendPolling(self):
         pass

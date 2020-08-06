@@ -16,4 +16,7 @@ class User:
         return text
 
     def __str__(self):
-        return "{}, {}, {}, {}".format(self.id, self.f_name, self.l_name, self.username)
+        return """מספר זיהוי: {}
+        שם פרטי: {}
+        שם משפחה: {}
+        שם משתמש: {}""".format(self.id, self.f_name, self.l_name, self.username)

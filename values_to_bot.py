@@ -6,7 +6,8 @@ from google_spreadsheep_reader import google_spreadsheet_reader
 SPREADSHEET_ID = '1ckk82XyjJ7mSxwgDMJYew8dR3AgY8umj1l8XyHVJAIg'
 RANGE_OF_COMMANDS = 'range'
 
-file_column = ["name", "type", "father_menu", "answer", "row", "column", "button_inline", "is_contact"]
+file_column = ["name", "type", "father_menu", "answer", "row", "column", "is_contact","disable_markdown","disable_web_page_preview", "back_to_main"]
+
 
 def list_to_dict(row):
     result = {}
@@ -38,3 +39,12 @@ class data_to_bot:
     def reset(self):
         self.spreadsheet_reader = google_spreadsheet_reader(SPREADSHEET_ID, RANGE_OF_COMMANDS)
         self.botMenu = BotMenu(self.get_data_from_file())
+
+
+if __name__ == "__main__":
+    bot = data_to_bot()
+    while True:
+        input_message = input("Enter Message >>\n")
+        print(bot.botMenu.response_to_command(input_message))
+        if input_message == "Exit":
+            break

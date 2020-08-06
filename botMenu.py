@@ -1,11 +1,19 @@
 from typing import List, Dict, Optional
 
-COMMAND_NOT_FOUND_MESSAGE = "אוף. הבוט לא הבין מה אתה מחפש 🙁 הוא בסך הכל אוסף של אלגוריתמים - אז הטעות כנראה היא שלך " \
+COMMAND_NOT_FOUND_MESSAGE = "אוף. הבוט לא הבין מה אתה מחפש 🙁" \
+                            "בהתחשב בכך שהוא בסך הכל אוסף של אלגוריתמים - אז הטעות כנראה היא שלך..." \
                             "😜 תנסה לחפש במילים אחרות או להשתמש בתפריט... 😉 "
-RETURN_MENU_MESSAGE = "חזור 🔁"
-RETURN_MESSAGE = "חזרתי 💪"
+RETURN_MENU_MESSAGE = "חזור 🔙"
+RETURN_MESSAGE = "חזרתי לתפריט הראשי 🔙"
 
 types = ["photo", "document"]
+
+IGNORE_WORDS = ["הרב", "מר", "פרופ'", "גב'", """ד"ר""", "גברת"]
+
+
+def get_all_setting_for_command(command):
+    return command["answer"], command["disable_markdown"] == "TRUE", command["disable_web_page_preview"] == "TRUE", \
+           command["back_to_main"] == "TRUE"
 
 
 class BotMenu:
@@ -23,23 +31,23 @@ class BotMenu:
 
     def response_to_command(self, text):
         result = []
-        for i in self.commands:
-            if i["is_contact"] == 'FALSE':
-                if i["name"] == text:
-                    return i["answer"]
+        command: dict
+        for command in self.commands:
+            if command["is_contact"] != 'TRUE':
+                if command["name"] == text:
+                    return get_all_setting_for_command(command)
             else:
-                spaceIndex = i["name"].find(' ')
-                firstName = i["name"][:spaceIndex]
-                lastName = i["name"][spaceIndex + 1:]
-                if firstName in text or lastName in text:
-                    if i["name"] in text:
-                        return i["answer"]
-                    else:
-                        if i["answer"] not in result:
-                            result.append(i["answer"])
+                list_of_spilt = command["name"].strip().split(" ")
+                for j in list_of_spilt:
+                    if j in text.split(" ") and len(j) > 1 and j not in IGNORE_WORDS:
+                        if command["name"] in text:
+                            return get_all_setting_for_command(command)
+                        else:
+                            if command["answer"] not in result:
+                                result.append(command["answer"])
         if result:
-            return "\n".join(result)
-        return COMMAND_NOT_FOUND_MESSAGE
+            return "*הנה כל מה שמצאנו שמתאים לחיפוש שלך: 🔍*\n" + "🔵 "+ "\n 🔵 ".join(result), False, False, False
+        return COMMAND_NOT_FOUND_MESSAGE, False, False, True
 
     def menu_return(self, menu_name) -> Optional[str]:
         fathers = list(filter(lambda i: i["name"] == menu_name, self.commands))
@@ -48,7 +56,7 @@ class BotMenu:
         father_menu = fathers[0]["father_menu"]
         return father_menu
 
-    def menu_by_father(self, father_name):
+    def menu_by_father(self, father_name = "/start"):
 
         # take only command that father_menu is father name
         commands_for_menu = list(filter(lambda i: i["father_menu"] == father_name, self.commands))

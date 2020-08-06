@@ -15,9 +15,12 @@ FILENAME_report = "messages.csv"
 
 def report_to_channel(bot, message, text, user):
     try:
-        bot.IsendMessage(-1001205958777, """משתמש: {}
-        הודעה 💬: {}
-        תשובה 🗨 : {}""".format(user, text, message))
+        bot.IsendMessage(-1001205958777, """*משתמש:*
+        {}
+        *הודעה 💬:*
+        {}
+        *תשובה 🗨:*
+        {}""".format(user, text, message))
     except:
         print("Not find channel")
 
@@ -45,12 +48,15 @@ class Telegram_menu_bot:
 
             keyboard = self.botMenu.menu_by_father(text)
 
-            message = self.botMenu.response_to_command(text)
+            message, disable_markdown, disable_web_preview, back_to_main = self.botMenu.response_to_command(text)
+
+            if back_to_main:
+                keyboard = self.botMenu.menu_by_father()
 
             message = user.replace_in_message(message)
 
             if text == RETURN_MENU_MESSAGE:
-                keyboard = self.botMenu.menu_by_father("/start")
+                keyboard = self.botMenu.menu_by_father()
                 message = RETURN_MESSAGE
 
             if user.id in self.admins:
@@ -80,11 +86,11 @@ class Telegram_menu_bot:
             type_of_message = self.botMenu.get_message_type(text)
             first, second = splitMessage(message)
             if type_of_message == "photo":
-                bot.IsendPhoto(chat_id, first, second, keyboard=keyboard)
+                bot.IsendPhoto(chat_id, first, second, keyboard=keyboard, disable_web_preview=disable_web_preview, mark_down=not disable_markdown)
             elif type_of_message == "file":
-                bot.IsendFile(chat_id, first, second, keyboard=keyboard)
+                bot.IsendFile(chat_id, first, second, keyboard=keyboard,disable_web_preview=disable_web_preview, mark_down=not disable_markdown)
             else:
-                bot.IsendMessage(chat_id, message, keyboard=keyboard)
+                bot.IsendMessage(chat_id, message, keyboard=keyboard, disable_web_preview=disable_web_preview, mark_down=not disable_markdown)
 
             report_to_channel(bot, message, text, user)
             self.file_reporter.addLine(user.id, user.f_name, user.l_name, user.username, text, message)

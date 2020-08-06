@@ -26,14 +26,13 @@ class TelepbotBot:
         keyboard = self.get_valid_keyboard(keyboard)
         self.bot.send_message(chat_id, message, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard)
 
-    def IsendFile(self, chat_id, file_id, text=None,keyboard=None):
+    def IsendFile(self, chat_id, file_id, text=None, keyboard=None):
         keyboard = self.get_valid_keyboard(keyboard)
         self.bot.send_document(chat_id, file_id, caption=text, reply_markup=keyboard, parse_mode='Markdown')
 
     def IsendPhoto(self, chat_id, photo_id, text, keyboard=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.send_photo(chat_id, photo_id, caption=text,reply_markup=keyboard,parse_mode='Markdown')
-
+        self.bot.send_photo(chat_id, photo_id, caption=text, reply_markup=keyboard, parse_mode='Markdown')
 
     def get_valid_keyboard(self, keyboard):
         if keyboard and not isinstance(keyboard, str):
@@ -41,7 +40,6 @@ class TelepbotBot:
         else:
             keyboard = None
         return keyboard
-
 
 
 @bot.message_handler(func=lambda message: True,
@@ -60,5 +58,6 @@ def answer(update):
     telegram_menu_bot = Telegram_menu_bot()
 
     return telegram_menu_bot.messageHandler(chat_id, telepbotBot, user_p, text)
+
 
 bot.polling()
