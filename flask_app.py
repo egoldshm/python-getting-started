@@ -38,11 +38,11 @@ class flaskBot:
 
     def IsendFile(self, chat_id, file_id, text=None, keyboard=None, mark_down=True, disable_web_preview=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendDocument(chat_id, file_id, caption=text, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard, disable_web_page_preview=disable_web_preview)
+        self.bot.sendDocument(chat_id, file_id, caption=text, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard)
 
     def IsendPhoto(self, chat_id, photo_id, text=None, keyboard=None, mark_down=True, disable_web_preview=None):
         keyboard = self.get_valid_keyboard(keyboard)
-        self.bot.sendPhoto(chat_id, photo_id, caption=text, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard, disable_web_page_preview=disable_web_preview)
+        self.bot.sendPhoto(chat_id, photo_id, caption=text, parse_mode='Markdown' if mark_down else None, reply_markup=keyboard)
 
     def IsendPolling(self):
         pass
