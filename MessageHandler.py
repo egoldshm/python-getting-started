@@ -68,6 +68,7 @@ class Telegram_menu_bot:
                 if text == RESET_MESSAGE:
                     self.data_to_bot.reset()
                     self.botMenu = self.data_to_bot.botMenu
+                    keyboard = self.botMenu.menu_by_father(text)
                     message = "התפריט אופס בהצלחה! 👌 "
 
                 elif SEND_MESSAGE_TO_ALL in text:
